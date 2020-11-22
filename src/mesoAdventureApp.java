@@ -2,10 +2,6 @@
  * 
  */
 
-/**
- * @author erono
- *
- */
 public class mesoAdventureApp {
 
 	/**
