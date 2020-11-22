@@ -20,4 +20,12 @@ class RandomTenTest {
 		int number = ten.getRandomNumber();
 		assertTrue(number >= 1 && number <= 10);
 	}
+	
+	@Test
+	void random10_can_set_specific_numbers_too() {
+		RandomTen ten = new RandomTen();
+		ten.setNumber(10);
+		int number = ten.getRandomNumber();
+		assertTrue(number == 10);
+	}
 }

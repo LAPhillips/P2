@@ -17,6 +17,11 @@ public class RandomTen implements RandomNumbers{
 		this.random10 = (int) ((Math.random()*(9))+ 1);
 	}
 	
+	//for testing purposes only
+	@Override
+	public void setNumber(int number) {
+		this.random10 = number;
+	}
 	
 
 
