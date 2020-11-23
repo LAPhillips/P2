@@ -1,3 +1,4 @@
+import domain.Creature;
 import domain.CreatureDifficulty;
 import domain.CreatureGenerator;
 
@@ -8,16 +9,13 @@ import domain.CreatureGenerator;
 public class TaleOfNammu {
 
 	public static void main(String[] args) {
-		CreatureGenerator gen = new CreatureGenerator();
-		gen.setCreatureDifficulty(1);
-		System.out.println(gen.newCreatureName());
+		Creature creature = new Creature();
 		
-		gen.setCreatureDifficulty(2);
-		System.out.println(gen.newCreatureName());
+		creature.setRandomDifficulty();
+		creature.setRandomName();
 		
-		gen.setCreatureDifficulty(3);
-		System.out.println(gen.newCreatureName());
-		
+		System.out.println(creature.getDifficulty());
+		System.out.println(creature.getName());
 
 
 	}

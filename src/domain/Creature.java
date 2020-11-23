@@ -1,25 +1,38 @@
 package domain;
 
 public class Creature implements Beings{
+	private CreatureGenerator generator;
 	private String name;
 	private int hitpoints;
-	private int baseAttack = 20;
+	private int baseAttack;
 	private int defense;
 	private int currentHit;
+	private CreatureDifficulty difficulty;
 	
 	public Creature() {
-		
+		this.generator = new CreatureGenerator();
+		this.name = "noName";
+		this.hitpoints = 0;
+		this.baseAttack = 20;
+		this.defense = 0;
+		this.currentHit = 0;
+		this.difficulty = CreatureDifficulty.EASY;
 	}
 	
-	public void generateName() {
-		
+	public void setRandomDifficulty() {
+		this.difficulty = generator.generateDifficulty();
+	}
+	
+	public CreatureDifficulty getDifficulty() {
+		return this.difficulty;
+	}
+	
+	public void setRandomName() {
+		this.name = generator.newCreatureName();
 	}
 
-	
-	
 	public String getName() {
-		
-		return null;
+		return this.name;
 	}
 
 	@Override

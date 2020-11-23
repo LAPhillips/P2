@@ -2,16 +2,16 @@ package domain;
 
 public class CreatureGenerator {
 	
-	private String[] hardCreatures = new String[] {"Adventurous", "Agile", "Assertive", "Abnormal",
+	private String[] hardCreatures = new String[] {"Adventurous", "Agile", "Assertive", "Ancient",
 			"Aggressive","Brilliant", "Caustic", "Charming", "Clever", "Cruel", "Deft", "Demonic", "Dire", "Egotistical", "Ferocious",
-			"Fiery", "Great", "Hateful","Impetuous", "Independent", "Powerful", "Quick", "Spiteful", "Stern", "Shrewd",
+			"Fiery", "Great", "Hateful","Impetuous", "Independent", "Powerful", "Murderous", "Spiteful", "Vicious", "Shrewd",
 			"Soulless", "Spirited", "Stoic", "Strong", "Immortal", "Fearsome", "Nameless", "Huge", "Horrendous", "Deadly",
-			"Hideous", "Towering", "Grotesque", "Evil", "Dire", "Vicious", "Remorseless", "Proud", "Frenzied", 
+			"Hideous", "Towering", "Grotesque", "Evil", "Dire", "Punishing", "Remorseless", "Proud", "Frenzied", 
 			"Bloodthirsty", "Jeweled", "Jaded"};
 	private String[] mediumCreatures = new String[] {"Average", "Awful", "Ardent", "Attentive", 
 			"Brave", "Callous", "Courageous", "Crabby", "Cranky", "Confident", "Crafty", "Crass", "Dutiful",
 			"Decisive", "Depressed", "Dirty", "Disruptive", "Evasive", "Energetic", "Enthusiastic", "Fastidious", "Intelligent",
-			"Gloomy", "Grouchy", "Irritating", "Irritable", "Judgmental", "Mean", "Miserable", "Nasty", "Persnickety", "Resourceful",
+			"Gloomy", "Grouchy", "Irritating", "Irritable", "Judgmental", "Mean", "Miserable", "Nasty", "Brutal", "Resourceful",
 			"Restless", "Resentful", "Serious", "Somber", "Sour", "Surly", "Ugly", "Uncooperative", "Unemotional",
 			"Unpleasant","Reckless", "Haggard"};
 	private String[] easyCreatures = new String[] {"Apprehensive", "Absent-minded", "Apathetic", "Boring", 
@@ -29,6 +29,11 @@ public class CreatureGenerator {
 	
 	public CreatureGenerator() {
 		this.difficulty = CreatureDifficulty.EASY;	
+	}
+	
+	public CreatureDifficulty generateDifficulty() {
+		setCreatureDifficulty(randomizeDifficulty());
+		return this.difficulty;
 	}
 	
 	public CreatureDifficulty getDifficulty() {
@@ -69,7 +74,7 @@ public class CreatureGenerator {
 		}	
 		return attributeIndex;
 	}
-	
+
 	
 	public String createCreatureName(int attribute, int creatureType) {
 		String creatureName = " ";
@@ -87,6 +92,17 @@ public class CreatureGenerator {
 		return creatureName;
 	}
 	
-	
+	public int randomizeDifficulty() {
+		int randomDifficulty = (int) (Math.random()*10);
+		if (randomDifficulty <= 5) {
+			return 1; //If difficulty is 1, it is easy
+		}
+		else if (randomDifficulty <= 9 ) {
+			return 2;
+		}
+		else {
+			return 3;
+		}
+	}
 
 }

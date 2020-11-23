@@ -69,5 +69,21 @@ class CreatureGeneratorTest {
 		assertNotNull(creature); //can't really test out all variations, but make sure it is not null
 	}
 	
+	@Test
+	void cG_gets_random_difficulty() {
+		CreatureGenerator gen = new CreatureGenerator();
+		int difficulty = gen.randomizeDifficulty();
+		assertTrue(difficulty >= 1 && difficulty <= 3);
+		}
+	
+	@Test
+	void cG_sets_random_difficulty() {
+		CreatureGenerator gen = new CreatureGenerator();
+		CreatureDifficulty difficulty = gen.generateDifficulty();
+		assertTrue(difficulty == CreatureDifficulty.EASY || 
+				difficulty == CreatureDifficulty.MEDIUM || 
+				difficulty == CreatureDifficulty.HARD);
+		}
+	
 
 }
