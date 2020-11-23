@@ -34,11 +34,11 @@ class CreatureGeneratorTest {
 		CreatureGenerator gen = new CreatureGenerator();
 		gen.setCreatureDifficulty(3);
 		int index = gen.attributeType();
-		assertTrue(index >= 0 && index <= 478); //index count should fall between 0 - 47
+		assertTrue(index >= 0 && index <= 47); //index count should fall between 0 - 47
 		
 		gen.setCreatureDifficulty(2);
 		index = gen.attributeType();
-		assertTrue(index >= 0 && index <= 43); //index should fall between 0 - 43
+		assertTrue(index >= 0 && index <= 42); //index should fall between 0 - 43
 		
 		gen.setCreatureDifficulty(1);
 		index = gen.attributeType();
@@ -84,6 +84,38 @@ class CreatureGeneratorTest {
 				difficulty == CreatureDifficulty.MEDIUM || 
 				difficulty == CreatureDifficulty.HARD);
 		}
+	
+	@Test
+	void cG_generates_hit_points() {
+		CreatureGenerator gen = new CreatureGenerator();
+		gen.setCreatureDifficulty(3);
+		int hp = gen.getRandomizedHitPoints();
+		assertTrue(hp >= 10 && hp <= 30, "first"); //hp should fall between 10 and 30
+		
+		gen.setCreatureDifficulty(2);
+		hp = gen.getRandomizedHitPoints();
+		assertTrue(hp >= 2 && hp <= 12, "second"); //hp should fall between 2 and 12
+		
+		gen.setCreatureDifficulty(1);
+		hp = gen.getRandomizedHitPoints();
+		assertTrue(hp >= 1 && hp <= 6, "third"); //hp should fall between 1 and 6	
+	}
+	
+	@Test
+	void cG_generates_defense() {
+		CreatureGenerator gen = new CreatureGenerator();
+		gen.setCreatureDifficulty(3);
+		int def = gen.getDefense();
+		assertTrue(def >= -9 && def <= -2, "first"); //def should fall between -9 and -2
+		
+		gen.setCreatureDifficulty(2);
+		def = gen.getDefense();
+		assertTrue(def >= -6 && def <= -1, "second"); //def should fall between -6 and -1
+		
+		gen.setCreatureDifficulty(1);
+		def = gen.getDefense();
+		assertTrue(def >= -2 && def <= 0, "third"); //def should fall between -1 and 0
+	}
 	
 
 }

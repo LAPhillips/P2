@@ -19,8 +19,19 @@ public class Creature implements Beings{
 		this.difficulty = CreatureDifficulty.EASY;
 	}
 	
+	public void setupCreature() {
+		setRandomDifficulty();
+		setRandomName();
+		setDefense();
+		setRandomizedHitpoints();
+	}
+	
 	public void setRandomDifficulty() {
 		this.difficulty = generator.generateDifficulty();
+	}
+	
+	public void setDefense() {
+		this.defense = generator.getDefense();
 	}
 	
 	public CreatureDifficulty getDifficulty() {
@@ -35,15 +46,19 @@ public class Creature implements Beings{
 		return this.name;
 	}
 
-	@Override
+	
 	public void setHitpoints(int amount) {
-		
+		this.hitpoints = amount;
+	}
+	
+	public void setRandomizedHitpoints() {
+		int hp = generator.getRandomizedHitPoints();
+		setHitpoints(hp);
 	}
 
 	@Override
 	public int getHitpoints() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.hitpoints;
 	}
 
 	@Override
@@ -62,6 +77,11 @@ public class Creature implements Beings{
 	public int getHitAmount() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public String toString() {
+		return this.name + " has " + this.hitpoints + " hit points, " + this.defense + " defense";
 	}
 
 }

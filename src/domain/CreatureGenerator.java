@@ -10,7 +10,7 @@ public class CreatureGenerator {
 			"Bloodthirsty", "Jeweled", "Jaded"};
 	private String[] mediumCreatures = new String[] {"Average", "Awful", "Ardent", "Attentive", 
 			"Brave", "Callous", "Courageous", "Crabby", "Cranky", "Confident", "Crafty", "Crass", "Dutiful",
-			"Decisive", "Depressed", "Dirty", "Disruptive", "Evasive", "Energetic", "Enthusiastic", "Fastidious", "Intelligent",
+			"Decisive", "Depressed", "Dirty", "Disruptive", "Evasive", "Energetic", "Enthusiastic", "Intelligent",
 			"Gloomy", "Grouchy", "Irritating", "Irritable", "Judgmental", "Mean", "Miserable", "Nasty", "Brutal", "Resourceful",
 			"Restless", "Resentful", "Serious", "Somber", "Sour", "Surly", "Ugly", "Uncooperative", "Unemotional",
 			"Unpleasant","Reckless", "Haggard"};
@@ -105,4 +105,36 @@ public class CreatureGenerator {
 		}
 	}
 
+	public int getRandomizedHitPoints() {
+		int hitpoints = 0;
+		switch(this.difficulty) {
+		case EASY:
+			hitpoints = (int) ((Math.random()*(5)+1));
+			break;
+		case MEDIUM:
+			hitpoints = (int) ((Math.random()*(10)+2));
+			break;
+		case HARD:
+			hitpoints = (int) ((Math.random()*(20))+10);
+			break;
+		}
+		return hitpoints;
+	}
+	
+	public int getDefense() {
+		int defense = 0;
+		switch(this.difficulty) {
+		case EASY:
+			defense = (int) ((Math.random()*(2)));
+			break;
+		case MEDIUM:
+			defense = (int) ((Math.random()*(5))+1);
+			break;
+		case HARD:
+			defense = (int) ((Math.random()*(7))+2);
+			break;
+		}
+		return (defense * -1);
+	}
+	
 }

@@ -11,11 +11,8 @@ public class TaleOfNammu {
 	public static void main(String[] args) {
 		Creature creature = new Creature();
 		
-		creature.setRandomDifficulty();
-		creature.setRandomName();
-		
-		System.out.println(creature.getDifficulty());
-		System.out.println(creature.getName());
+		creature.setupCreature();
+		System.out.println(creature);
 
 
 	}
