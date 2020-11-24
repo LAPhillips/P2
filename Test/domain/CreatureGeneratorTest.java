@@ -105,15 +105,15 @@ class CreatureGeneratorTest {
 	void cG_generates_defense() {
 		CreatureGenerator gen = new CreatureGenerator();
 		gen.setCreatureDifficulty(3);
-		int def = gen.getDefense();
+		int def = gen.generateDefense();
 		assertTrue(def >= -9 && def <= -2, "first"); //def should fall between -9 and -2
 		
 		gen.setCreatureDifficulty(2);
-		def = gen.getDefense();
+		def = gen.generateDefense();
 		assertTrue(def >= -6 && def <= -1, "second"); //def should fall between -6 and -1
 		
 		gen.setCreatureDifficulty(1);
-		def = gen.getDefense();
+		def = gen.generateDefense();
 		assertTrue(def >= -2 && def <= 0, "third"); //def should fall between -1 and 0
 	}
 	

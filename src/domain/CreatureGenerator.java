@@ -75,7 +75,6 @@ public class CreatureGenerator {
 		return attributeIndex;
 	}
 
-	
 	public String createCreatureName(int attribute, int creatureType) {
 		String creatureName = " ";
 		switch(this.difficulty) {
@@ -121,7 +120,7 @@ public class CreatureGenerator {
 		return hitpoints;
 	}
 	
-	public int getDefense() {
+	public int generateDefense() {
 		int defense = 0;
 		switch(this.difficulty) {
 		case EASY:

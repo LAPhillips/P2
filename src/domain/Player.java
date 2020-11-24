@@ -1,49 +1,25 @@
 package domain;
 
-public class Player implements Beings {
-	private String name;
-	private int hitpoints;
-	private int baseAttack = 20;
-	private int defense;
-	private int currentHit;
-
+public class Player extends Beings {
+	private PlayerType type;
+	
 	public Player(String inputName, int playerDefense) {
-		this.name = inputName;
-		this.defense = playerDefense;
+		super(inputName, playerDefense);
 	}
 	
-	public String getName() {
-		return this.name;
+	public void setType(PlayerType playerType) {
+		this.type = playerType;
 	}
 	
-	public void setHitpoints(int amount) {
-		this.hitpoints = amount;
+	public void calculateHitpoints() {
+		int hitpoints = (int) ((Math.random()*(30))+ 20);
+		super.setHitpoints(hitpoints);
 	}
 	
-	public int getHitpoints() {
-		return this.hitpoints;
+	@Override
+	public String toString() {
+		return super.getName() + " has " + super.getHitpoints() + " hit points";
 	}
 	
-	public int getDefense() {
-		return this.defense;
-	}
 	
-	public int getHitAmount() {
-		return this.currentHit;
-	}
-	
-	public void attacked(int attack) {
-		//does the player get hit
-		if(baseAttack + defense <= attack) {
-			//monster hits
-		//	int hit = monster.getHit();
-		//	damaged(hit)
-		}
-	}
-
-	public void damaged(int hitAmount) {
-		hitpoints -= hitAmount;
-	}
-
-
 }
