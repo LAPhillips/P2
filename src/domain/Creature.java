@@ -6,7 +6,7 @@ public class Creature extends Beings{
 	
 	public Creature() {
 		this.generator = new CreatureGenerator();
-		this.difficulty = CreatureDifficulty.EASY;
+		this.difficulty = null;
 	}
 	
 	public void setupCreature() {

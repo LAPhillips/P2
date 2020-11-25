@@ -9,6 +9,7 @@ public class Beings {
 	public Beings() {
 		this.name = "noName";
 		this.hitpoints = 0;
+		this.defense = 0;
 	}
 	
 	public Beings(String inputName, int defense) {
