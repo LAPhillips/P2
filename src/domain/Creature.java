@@ -35,12 +35,13 @@ public class Creature extends Beings{
 			attack = (int) ((Math.random()*(7))+3);
 			break;
 		}	
+		super.setAttackPoints(attack);
 		return attack;
 	}
 	
 	@Override
 	public String toString() {
-		return super.getName() + " has " + super.getHitpoints() + " hit points, " + super.getDefense() + " defense";
+		return super.getName() + " has " + super.getHitpoints() + " hit points.";
 	}
 
 	//****************basic getters & setters*******************************
