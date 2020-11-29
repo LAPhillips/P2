@@ -3,17 +3,17 @@ package domain;
 public enum CreatureDifficulty {
 	EASY{
 		public String toString(){
-			return "The beast looks quite weak.";
+			return "[weak]";
 		}
 	},
 	MEDIUM {
 		public String toString(){
-			return "The beast looks average.";
+			return "[average]";
 		}
 	},
 	 HARD{
 			public String toString(){
-				return "The beast looks really strong.";
+				return "[strong]";
 			}
 		}
 }

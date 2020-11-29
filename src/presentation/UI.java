@@ -6,6 +6,7 @@ import domain.Beings;
 import domain.Controller;
 import domain.EncounterType;
 import domain.Journey;
+import domain.Player;
 
 public class UI {
 	private Controller control;
@@ -56,7 +57,6 @@ public class UI {
 		}
 		else if (response.equalsIgnoreCase("E") || response.equalsIgnoreCase("End")) {
 			journey.updateIsOver();
-
 		}
 	}
 	
@@ -70,14 +70,15 @@ public class UI {
 			}
 			//neutral look
 			else if(journey.getLookType() == EncounterType.NEUTRAL) {
-				System.out.println("You don't see anything else of interest. Time to move on.");
+				System.out.println("You don't see anything of interest. Time to move on.");
 			}
 			//negative look
 			else {
 				Beings creature = journey.getNewCreature();
-				fullBattle(creature, journey.getPlayer(), journey);
+				fullBattle(creature, (Player) journey.getPlayer(), journey);
 			}
 		}
+		//already looked around
 		else {
 			System.out.println("You already looked around this area. Consider moving on.");
 		}
@@ -99,8 +100,7 @@ public class UI {
 		System.out.println("[E]nd game");
 	}
 	
-	
-	
+
 	public void fullJourney(Journey journey) {
 		while(journey.getPathTracker() < journey.getPath().length-1 && !journey.getIsOver()) {
 			System.out.println();
@@ -115,9 +115,10 @@ public class UI {
 		System.out.println("You arrive at " + journey.encounterDescription());
 		//do you get attacked?
 		if (journey.isAttack()) {
-			System.out.println("You get attacked by a " + journey.getCurrentCreature().getName()+ ".");
 			//if yes, what attacks?
-			fullBattle(journey.getCurrentCreature(), journey.getPlayer(), journey);
+			System.out.println("You get attacked by a " + journey.getCurrentCreature().getName() + " "
+					+ journey.getCurrentCreature().getDifficulty() + ".");
+			fullBattle(journey.getCurrentCreature(), (Player) journey.getPlayer(), journey);
 		}
 		else {
 			System.out.println("You enjoy your time here and relax.");
@@ -125,14 +126,14 @@ public class UI {
 
 	}
 	
-	public void battleAttack(Beings attacker, Beings attacked, Journey journey) {
+	public void creatureAttack(Beings attacker, Beings attacked, Journey journey) {
 		if( journey.isHit(attacker, attacked)) { 	//does the player get hit?
 			journey.takesDamage(attacker, attacked); //if hit, they take damage
 			System.out.println();
 			System.out.println(attacker.getName() + " attacks for " + attacker.getAttackPoints() + " damage.");
 			journey.checkDeath(attacker, attacked); //check to see if the participants are still alive
 			if (attacked.isAlive()) {
-				System.out.println(attacked.getName() + " has " + attacked.getHitpoints() + " hitpoints left.");
+				System.out.println("You have " + attacked.getHitpoints() + " hitpoints left.");
 			}
 		}
 		else {
@@ -140,17 +141,33 @@ public class UI {
 		}
 	}
 	
-	public void fullBattle(Beings creature, Beings player, Journey journey) {
+	public void playerAttack(Player attacker, Beings attacked, Journey journey, int attackType) {
+		if( journey.isHit(attacker, attacked, attackType)) { 	//does the player get hit?
+			journey.takesDamage(attacker, attacked, attackType); //if hit, they take damage
+			System.out.println();
+			System.out.println("You attack for " + attacker.getAttackPoints() + " damage.");
+			journey.checkDeath(attacker, attacked); //check to see if the participants are still alive
+			if (attacked.isAlive()) {
+				System.out.println(attacked.getName() + " has " + attacked.getHitpoints() + " hitpoints left.");
+			}
+		}
+		else {
+			System.out.println("You missed " + attacked.getName() + "."); //if they don't get hit nothing happens
+		}
+	}
+
+
+	public void fullBattle(Beings creature, Player player, Journey journey) {
 		while(creature.isAlive() && player.isAlive()) {
-			battleAttack(creature, player, journey);
+			creatureAttack(creature, player, journey);
 			if (!creature.isAlive()) {
 				break;
 			}
 			System.out.println();
-			System.out.println(player.getName() + ", it's your turn to attack.");
-			System.out.println("[1] simple attack or [2] complex attack");
-			String attackType = scan.nextLine();
-			battleAttack(player, creature, journey);
+			System.out.println(player.getName() + ", it's your turn.");
+			System.out.println("[1] basic attack, [2] complex attack, or [3] run away");
+			int attackType = Integer.parseInt(scan.nextLine());
+			playerAttack(player, creature, journey, attackType);
 		}
 		whoIsAlive(creature, player);
 		

@@ -156,6 +156,14 @@ public class Journey {
 		this.isOver = true;
 	}
 	
+	public boolean isHit(Beings attacker, Beings attacked, int levelOfDifficulty) {
+		int attackRoll = attacker.seeIfAttack(levelOfDifficulty);
+		if (attacked.getBaseAttack() + attacked.getDefense() >= attackRoll) {
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean isHit(Beings attacker, Beings attacked) {
 		int attackRoll = attacker.seeIfAttack();
 		if (attacked.getBaseAttack() + attacked.getDefense() >= attackRoll) {
@@ -165,7 +173,12 @@ public class Journey {
 	}
 	
 	public void takesDamage(Beings attacker, Beings attacked) {
-		int hit = attacker.attack(); //if yes, the creature calculates how much they hit for
+		int hit = attacker.attack(); // the creature calculates how much they hit for
+		attacked.damaged(hit); //player takes damage
+	}
+	
+	public void takesDamage(Player attacker, Beings attacked, int attackType) {
+		int hit = attacker.attack(attackType); // the creature calculates how much they hit for
 		attacked.damaged(hit); //player takes damage
 	}
 

@@ -8,7 +8,7 @@ public class JourneyGenerator {
 	private String[] geographicFeature = new String[] {
 			"a quiet stream flowing through the woods.",	"a dark cave. It looks dangerous.",
 			"a grove of olive trees", "a huge canyon that reaches out into the far distance.",
-			"a small hill with several trees on top", "the foot of a mountain, with ragged rocks jutting out.",
+			"a small hill with several trees on top.", "the foot of a mountain, with ragged rocks jutting out.",
 			"a still lake with fish swimming lazily among rocks.", "a yellow field of swaying barley.",
 			"the outskirts of a small village.", "a vista with sand dunes",
 			"a small spring with trees circling it", "a collection of boulders piled on top of one another.",

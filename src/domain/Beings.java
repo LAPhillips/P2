@@ -54,8 +54,12 @@ public class Beings {
 		this.defense = defense;
 	}
 	
+	public int attackModifier() {
+		return (int) (Math.random()*(6)+1);
+	}
+	
 	public int attack() {	
-		setAttackPoints((int) (Math.random()*(6)+1));	
+		setAttackPoints(attackModifier());	
 		return this.attack;
 	}
 	
@@ -71,7 +75,14 @@ public class Beings {
 		this.attack = attack;
 	}
 
-	public int seeIfAttack() {
+	public int seeIfAttack(int levelOfDifficulty) { //for special attacks
+		if (levelOfDifficulty == 2) {
+			return (int) (Math.random()*(20) + 3);
+		}
+		return (int) (Math.random()*(20));
+	}
+	
+	public int seeIfAttack() { //standard will be 20
 		return (int) (Math.random()*(20));
 	}
 

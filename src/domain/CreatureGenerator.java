@@ -21,10 +21,10 @@ public class CreatureGenerator {
 			"Inconsiderate", "Incompetent", "Inexperienced", "Lethargic", "Lazy", "Morose", "Obnoxious", "Stinking",
 			"Plain", "Pensive", "Quiet", "Reclusive", "Reserved", "Sad", "Shy", "Slow", "Sensitive", "Tired", "Timid",
 			"Uncertain", "Unmotivated", "Unsure", "Vulnerable", "Wary", "Weak"};
-	private String[] typesOfCreatures = new String[] {"Djinn", "Udug", "Lamassu (Winged Bull)", "Alal (Lion-headed Man)",
+	private String[] typesOfCreatures = new String[] {"Djinn", "Udug", "Lamassu", "Alal",
 			"Hyena", "Lion", "Dog", "Eagle", "Scorpion", "Snake", "Ghost", "Wolf", "Harpy", "Serpent", "Ghoul",
 			"Ifrit", "Rukh", "Leopard", "Giant", "Bat", "Bear", "Caracal", "Toad",
-			"Viper", "Crocodile", "Spider", "Anzu (Fire-breathing Bird)", "Dragon", "Manticore", "Basilisk", "Sphinx", "Chimera", "Almiraj"};
+			"Viper", "Crocodile", "Spider", "Anzu", "Dragon", "Manticore", "Basilisk", "Sphinx", "Chimera", "Almiraj"};
 	private CreatureDifficulty difficulty;
 	
 	public CreatureGenerator() {
