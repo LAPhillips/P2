@@ -73,7 +73,7 @@ public class Encounter {
 		if (randomSelection == 1) {
 			look = EncounterType.NEGATIVE; 
 		}
-		else if(randomSelection == 2) {
+		else if(randomSelection == 2) { 
 			look = EncounterType.POSITIVE;
 		}
 		else {
@@ -97,6 +97,19 @@ public class Encounter {
 		return this.alreadyLooked;
 	}
 	
+	public EncounterType getLookType() {
+		return this.look;
+	}
+
+	public void updateLooked() {
+		this.alreadyLooked = true;
+	}
+	
+	public Creature getNewCreature() {
+		Creature creature = new Creature();
+		creature.setupCreature();
+		return creature;
+	}
 	
 	@Override
 	public String toString() {
@@ -107,14 +120,9 @@ public class Encounter {
 			return "You look around and see " + this.whatDoYouSee; 
 		}
 	}
-
-	public EncounterType getLookType() {
-		return this.look;
-	}
-
-	public void updateLooked() {
-		this.alreadyLooked = true;
-	}
 	
+	
+
+
 
 }

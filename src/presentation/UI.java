@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import domain.Beings;
 import domain.Controller;
+import domain.EncounterType;
 import domain.Journey;
 
 public class UI {
@@ -53,26 +54,44 @@ public class UI {
 		else if (response.equalsIgnoreCase("L") || response.equalsIgnoreCase("Look")) {
 			look(journey);
 		}
+		else if (response.equalsIgnoreCase("E") || response.equalsIgnoreCase("End")) {
+			journey.updateIsOver();
+
+		}
 	}
 	
-	private void look(Journey journey) {
+	public void look(Journey journey) {
 		if (!journey.getAlreadyLooked()) {
-			System.out.println(journey.manageLook());
+			System.out.println(journey.getLook());
+			//positive look
+			if (journey.getLookType() == EncounterType.POSITIVE) {
+				System.out.println("This is a boon for you. Your health has recovered some.");
+				System.out.println("Hitpoints increased by " + journey.heal() + ".");
+			}
+			//neutral look
+			else if(journey.getLookType() == EncounterType.NEUTRAL) {
+				System.out.println("You don't see anything else of interest. Time to move on.");
+			}
+			//negative look
+			else {
+				Beings creature = journey.getNewCreature();
+				fullBattle(creature, journey.getPlayer(), journey);
+			}
 		}
 		else {
-			System.out.println("You already explored this area. Consider moving on.");
+			System.out.println("You already looked around this area. Consider moving on.");
 		}
 		
 	}
 
-	private void checkHealth(Journey journey) {
+	public void checkHealth(Journey journey) {
 		System.out.println("YOUR STATS:");
 		System.out.println("Hitpoints: " + journey.getPlayer().getHitpoints());
 		System.out.println("Defense: " + (journey.getPlayer().getDefense()*-1));
 //		System.out.println("Attack: " + journey.getPlayer().getAttackPoints());
 	}
 
-	private void menu() {
+	public void menu() {
 		System.out.println("MENU:");
 		System.out.println("[T]ravel");
 		System.out.println("[L]ook around");
@@ -83,11 +102,11 @@ public class UI {
 	
 	
 	public void fullJourney(Journey journey) {
-		while(journey.getPathTracker() < journey.getPath().length-1) {
+		while(journey.getPathTracker() < journey.getPath().length-1 && !journey.getIsOver()) {
 			System.out.println();
 			nextSteps(journey);
 		}
-		System.out.println("Congratulations, you made it to " + journey.getJourneyType());
+		endGame(journey.getPlayer(), journey);
 	}
 
 	public void encounter(Journey journey) {
@@ -107,16 +126,18 @@ public class UI {
 	}
 	
 	public void battleAttack(Beings attacker, Beings attacked, Journey journey) {
-		int attackRoll = attacker.seeIfAttack();
-		if( attacked.getBaseAttack() + attacked.getDefense() >= attackRoll) { 	//does the player get hit?
-			int hit = attacker.attack(); //if yes, the creature calculates how much they hit for
-			attacked.damaged(hit); //player takes damage
-			System.out.println(attacker.getName() + " attacks for " + attacker.getAttackPoints());
+		if( journey.isHit(attacker, attacked)) { 	//does the player get hit?
+			journey.takesDamage(attacker, attacked); //if hit, they take damage
+			System.out.println();
+			System.out.println(attacker.getName() + " attacks for " + attacker.getAttackPoints() + " damage.");
+			journey.checkDeath(attacker, attacked); //check to see if the participants are still alive
+			if (attacked.isAlive()) {
+				System.out.println(attacked.getName() + " has " + attacked.getHitpoints() + " hitpoints left.");
+			}
 		}
 		else {
-			System.out.println(attacker.getName() + " missed " + attacked.getName());
+			System.out.println(attacker.getName() + " missed " + attacked.getName() + "."); //if they don't get hit nothing happens
 		}
-		journey.checkDeath(attacker, attacked);
 	}
 	
 	public void fullBattle(Beings creature, Beings player, Journey journey) {
@@ -143,6 +164,23 @@ public class UI {
 		}
 		
 	}
+	
+	public void endGame(Beings player, Journey journey) {
+		if (journey.getIsOver()) {
+			System.out.println("You have decided to end your journey and return back to your normal life.");
+		}else {
+			if (player.isAlive()) {
+				System.out.println();
+				System.out.println("Congratulations! After a long and arduous journey. You have finally made it to "  
+						+ journey.getJourneyType() + ".");
+				System.out.println("Your name will be etched on the tablets held in Ashurbanipal's library and your legacy will live on in story.");
+			}
+			else {
+				System.out.println("You have died. Your journey will remain unfulfilled.");
+			}
+		}
+	}
+	
 	
 	
 

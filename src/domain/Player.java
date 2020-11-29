@@ -16,6 +16,16 @@ public class Player extends Beings {
 		super.setHitpoints(hitpoints);
 	}
 	
+	public void heal(int healAmount) {
+		int hp = super.getHitpoints();
+		hp += healAmount;
+		super.setHitpoints(hp);
+	}
+	
+	public int healAmount() {
+		return (int) ((Math.random()*(4))+1);
+	}
+	
 	@Override
 	public String toString() {
 		return super.getName() + " has " + super.getHitpoints() + " hit points";

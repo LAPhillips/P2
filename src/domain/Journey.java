@@ -1,5 +1,6 @@
 package domain;
 
+
 public class Journey {
 	private JourneyGenerator generator;
 	private Encounter encounter;
@@ -8,6 +9,7 @@ public class Journey {
 	private String [] path;
 	private int pathTracker;
 	private int distance;
+	private boolean isOver;
 
 	public Journey() {
 		this.encounter = null;
@@ -15,6 +17,7 @@ public class Journey {
 		this.path = null;
 		this.pathTracker = -1;
 		this.distance = 0;
+		this.isOver = false;
 	}
 	
 	//overloaded constructor for testing
@@ -24,6 +27,7 @@ public class Journey {
 		this.player = new Player(name, -2);
 		this.pathTracker = -1;
 		this.distance = 0;
+		this.isOver = false;
 	}
 	
 	public void setupJourney(String response, String playerName) {
@@ -108,7 +112,7 @@ public class Journey {
 	}
 	
 	
-	public Beings getCurrentCreature() {
+	public Creature getCurrentCreature() {
 		return encounter.getCreature();
 	}
 	
@@ -125,24 +129,46 @@ public class Journey {
 		return encounter.getLookType();
 	}
 	
-	public Encounter manageLook() {
-		EncounterType type = getLookType();
+	public Encounter getLook() {
 		encounter.updateLooked();
-		switch(type) {
-		case POSITIVE:
-			//what is boon?
-			return this.encounter;
-		case NEUTRAL:
-			return  this.encounter;
-		case NEGATIVE:
-			return this.encounter;
-		}
-		return null;
+		return encounter;
 	}
 	
 	public boolean getAlreadyLooked() {
 		return encounter.alreadyLooked();
 	}
+	
+	public int heal() {
+		int amount = player.healAmount();
+		player.heal(amount);
+		return amount;
+	}
+
+	public Creature getNewCreature() {
+		return encounter.getNewCreature();
+	}
+	
+	public boolean getIsOver() {
+		return this.isOver;
+	}
+	
+	public void updateIsOver() {
+		this.isOver = true;
+	}
+	
+	public boolean isHit(Beings attacker, Beings attacked) {
+		int attackRoll = attacker.seeIfAttack();
+		if (attacked.getBaseAttack() + attacked.getDefense() >= attackRoll) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void takesDamage(Beings attacker, Beings attacked) {
+		int hit = attacker.attack(); //if yes, the creature calculates how much they hit for
+		attacked.damaged(hit); //player takes damage
+	}
+
 
 
 	
