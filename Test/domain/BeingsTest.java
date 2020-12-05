@@ -63,12 +63,32 @@ class BeingsTest {
 	}
 
 	@Test
-	void beings_attacks() {
+	void beings_shares_attack() {
 		Beings be = new Beings("player", -2);
 		int attack = be.attack();
 		assertTrue(attack >= 1 && attack <= 7);
 	}
 	
+	@Test
+	void beings_shares_attackBonus() {
+		Beings be = new Beings("player", -2);
+		int bonus = be.getAttackBonus();
+		assertEquals(0, bonus); //default is 0
+	}
+	
+	@Test
+	void beings_sets_attackBonus() {
+		Beings be = new Beings("player", -2);
+		be.setAttackBonus(10);
+		int bonus = be.getAttackBonus();
+		assertEquals(10, bonus); //set Bonus should be 10
+	}
+	
+	@Test
+	void beings_shares_if_being_is_alive() {
+		Beings be = new Beings("player", -2);
+		assertTrue(be.isAlive()); //default is true
+	}
 	
 	
 	@Test

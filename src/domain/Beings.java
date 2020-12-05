@@ -59,10 +59,6 @@ public class Beings {
 		this.defense = defense;
 	}
 	
-	public int attackModifier() {
-		return (int) (Math.random()*(6)+1);
-	}
-
 	public int getAttackPoints() {
 		return this.attack;
 	}
@@ -84,6 +80,10 @@ public class Beings {
 	}
 	
 	//****************battle methods*******************************
+
+	public int attackModifier() {
+		return (int) (Math.random()*(6)+1);
+	}
 
 	public void damaged(int hitAmount) {
 		hitpoints -= (hitAmount +  + attackBonus);
