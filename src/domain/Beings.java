@@ -3,24 +3,29 @@ package domain;
 public class Beings {
 	private String name;
 	private int hitpoints;
-	private int baseAttack = 20;
+	private int baseAttack;
 	private int defense;
 	private int attack;
+	private int attackBonus;
 	private boolean alive;
 	
 	public Beings() {
 		this.name = "noName";
 		this.hitpoints = 0;
+		this.baseAttack = 20;
 		this.defense = 0;
 		this.attack = 0;
+		this.attackBonus = 0;
 		this.alive = true;
 	}
 	
 	public Beings(String inputName, int defense) {
 		this.name = inputName;
-		this.defense = defense;
 		this.hitpoints = 0;
+		this.baseAttack = 20;
+		this.defense = defense;
 		this.attack = 0;
+		this.attackBonus = 0;
 		this.alive = true;
 	}
 	
@@ -57,22 +62,36 @@ public class Beings {
 	public int attackModifier() {
 		return (int) (Math.random()*(6)+1);
 	}
-	
-	public int attack() {	
-		setAttackPoints(attackModifier());	
-		return this.attack;
-	}
-	
-	public void damaged(int hitAmount) {
-		hitpoints -= hitAmount;
-	}
-	
+
 	public int getAttackPoints() {
 		return this.attack;
 	}
 	
-	public void setAttackPoints(int attack) {
+	public void setAttackPoints(int attack) { 
 		this.attack = attack;
+	}
+	
+	public int getAttackBonus() {
+		return this.attackBonus;
+	}
+	
+	public void setAttackBonus(int bonus) {
+		this.attackBonus = bonus;
+	}
+	
+	public boolean isAlive() {
+		return this.alive;
+	}
+	
+	//****************battle methods*******************************
+
+	public void damaged(int hitAmount) {
+		hitpoints -= (hitAmount +  + attackBonus);
+	}
+	
+	public int attack() {	
+		setAttackPoints(attackModifier());	
+		return this.attack;
 	}
 
 	public int seeIfAttack(int levelOfDifficulty) { //for special attacks
@@ -92,9 +111,6 @@ public class Beings {
 		}
 	}
 
-	public boolean isAlive() {
-		return this.alive;
-	}
-	
+
 	
 }

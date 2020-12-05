@@ -10,6 +10,7 @@ public class Journey {
 	private int pathTracker;
 	private int distance;
 	private boolean isOver;
+	private Boon boon;
 
 	public Journey() {
 		this.encounter = null;
@@ -18,6 +19,7 @@ public class Journey {
 		this.pathTracker = -1;
 		this.distance = 0;
 		this.isOver = false;
+		this.boon = new Boon();
 	}
 	
 	//overloaded constructor for testing
@@ -28,6 +30,7 @@ public class Journey {
 		this.pathTracker = -1;
 		this.distance = 0;
 		this.isOver = false;
+		this.boon = new Boon();
 	}
 	
 	public void setupJourney(String response, String playerName) {
@@ -42,6 +45,7 @@ public class Journey {
 		pathTracker = 0;
 		setDistanceLeft();
 		newEncounter();
+		boon.setupNewBoon();
 	}
 	
 	//where do you want to go? Cedar Forest? Mount Mashu? Salted Sea?
@@ -93,9 +97,28 @@ public class Journey {
 	public boolean isAttack() {
 		if (encounter.getEncounterType() == EncounterType.NEGATIVE) {
 			return true;
-		}else {
-			return false;
 		}
+		return false;
+	}
+	
+	public boolean isBoon() {
+		if (encounter.getEncounterType() == EncounterType.POSITIVE) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String getBoon() {
+		return boon.getCurrentBoon();
+	}
+	
+	public void newBoon() {
+		boon.setupNewBoon();
+	}
+	
+	public BoonType implementBoon() {
+		boon.implementBoon(player);
+		return boon.getBoonType();
 	}
 	
 	public void setDistanceLeft() {
@@ -116,7 +139,7 @@ public class Journey {
 		return encounter.getCreature();
 	}
 	
-	public Beings getPlayer() {
+	public Player getPlayer() {
 		return this.player;
 	}
 	
@@ -181,8 +204,7 @@ public class Journey {
 		int hit = attacker.attack(attackType); // the creature calculates how much they hit for
 		attacked.damaged(hit); //player takes damage
 	}
-
-
+	
 
 	
 	

@@ -42,7 +42,7 @@ class BeingsTest {
 		int baseAttack = be.getBaseAttack();
 		assertEquals(20, baseAttack); //default is 20
 	}
-
+	
 	@Test
 	void beings_shares_defense() {
 		Beings be = new Beings("player", -2);
@@ -51,11 +51,25 @@ class BeingsTest {
 	}
 	
 	@Test
+	void beings_sets_defense() {
+		Beings be = new Beings("player", -2);
+		int defense = be.getDefense();
+		assertEquals(-2, defense); 
+		
+		be.setDefense(-4);
+		defense = be.getDefense();
+		assertEquals(-4, defense); 
+		
+	}
+
+	@Test
 	void beings_attacks() {
 		Beings be = new Beings("player", -2);
 		int attack = be.attack();
 		assertTrue(attack >= 1 && attack <= 7);
 	}
+	
+	
 	
 	@Test
 	void beings_is_damaged() {
@@ -65,4 +79,5 @@ class BeingsTest {
 		int hp = be.getHitpoints(); 
 		assertEquals(1, hp); //beings should be 1
 	}
+	
 }

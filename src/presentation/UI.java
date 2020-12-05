@@ -58,6 +58,10 @@ public class UI {
 		else if (response.equalsIgnoreCase("E") || response.equalsIgnoreCase("End")) {
 			journey.updateIsOver();
 		}
+		else {
+			System.out.println("Wrong input. Please pick an action from the menu.");
+			menu();
+		}
 	}
 	
 	public void look(Journey journey) {
@@ -82,14 +86,13 @@ public class UI {
 		else {
 			System.out.println("You already looked around this area. Consider moving on.");
 		}
-		
 	}
 
 	public void checkHealth(Journey journey) {
 		System.out.println("YOUR STATS:");
 		System.out.println("Hitpoints: " + journey.getPlayer().getHitpoints());
 		System.out.println("Defense: " + (journey.getPlayer().getDefense()*-1));
-//		System.out.println("Attack: " + journey.getPlayer().getAttackPoints());
+		System.out.println("Attack Bonus: " + journey.getPlayer().getAttackBonus());
 	}
 
 	public void menu() {
@@ -105,6 +108,9 @@ public class UI {
 		while(journey.getPathTracker() < journey.getPath().length-1 && !journey.getIsOver()) {
 			System.out.println();
 			nextSteps(journey);
+			if (!journey.getPlayer().isAlive()) {
+				break;
+			}
 		}
 		endGame(journey.getPlayer(), journey);
 	}
@@ -120,8 +126,14 @@ public class UI {
 					+ journey.getCurrentCreature().getDifficulty() + ".");
 			fullBattle(journey.getCurrentCreature(), (Player) journey.getPlayer(), journey);
 		}
+		else if(journey.isBoon()) {
+			System.out.println(journey.getBoon());
+			System.out.println(journey.implementBoon());
+			journey.newBoon();
+			
+		}
 		else {
-			System.out.println("You enjoy your time here and relax.");
+			System.out.println("It is peaceful here. You enjoy your time here and relax.");
 		}
 
 	}
@@ -166,20 +178,35 @@ public class UI {
 			System.out.println();
 			System.out.println(player.getName() + ", it's your turn.");
 			System.out.println("[1] basic attack, [2] complex attack, or [3] run away");
-			int attackType = Integer.parseInt(scan.nextLine());
-			playerAttack(player, creature, journey, attackType);
+			String attackTypeEntered = scan.nextLine(); 
+			int attackType = attackType(attackTypeEntered);
+			playerAttack(player, creature, journey, attackType);	
 		}
-		whoIsAlive(creature, player);
+		whoIsAlive(creature, player, journey);
 		
 	}
 	
-	public void whoIsAlive(Beings creature, Beings player) {
+	public int attackType(String attackTypeEntered) {
+		int attackType = 0;;
+		if (Character.isDigit(attackTypeEntered.charAt(0))) { //checking to see if it is a digit
+			attackType = Integer.parseInt(attackTypeEntered); //turning it into int
+			if (attackType < 0 && attackType > 4) { //making sure it is in the ui menu range
+				attackType = 1; //if not, automatically set to default (1)
+			}
+		}
+		else { //if it isn't a digit
+			attackType = 1; //set it to default(1)
+		}
+		return attackType;
+	}
+	
+	public void whoIsAlive(Beings creature, Beings player, Journey journey) {
 		if (!creature.isAlive()) {
 			System.out.println(creature.getName() + " is slain.");
 		}else {
 			System.out.println("You were killed by a " + creature.getName());
+			player.checkDeath();
 		}
-		
 	}
 	
 	public void endGame(Beings player, Journey journey) {

@@ -1,18 +1,15 @@
 package domain;
 
 public class Player extends Beings {
-	private PlayerType type;
+	private int attackBonus;
 	
 	public Player(String inputName, int playerDefense) {
 		super(inputName, playerDefense);
-	}
-	
-	public void setType(PlayerType playerType) {
-		this.type = playerType;
+		this.attackBonus = 0;
 	}
 	
 	public void calculateHitpoints() {
-		int hitpoints = (int) ((Math.random()*(30))+ 20);
+		int hitpoints = (int) ((Math.random()*(30))+ 20); 
 		super.setHitpoints(hitpoints);
 	}
 	
@@ -24,12 +21,6 @@ public class Player extends Beings {
 	
 	public int healAmount() {
 		return (int) ((Math.random()*(4))+1);
-	}
-	
-	public void setupAttack(int attackType) {
-		if (attackType == 2) {
-			
-		}
 	}
 	
 	public int attackModifier(int hitType) {
@@ -44,8 +35,7 @@ public class Player extends Beings {
 		return super.getAttackPoints();
 	}
 	
-	
-	
+
 	@Override
 	public String toString() {
 		return super.getName() + " has " + super.getHitpoints() + " hit points";

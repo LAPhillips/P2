@@ -57,10 +57,10 @@ public class Encounter {
 	
 	public void typeOfEncounter() {
 		int randomSelection = (int) (Math.random()*(10)+1);
-		if (randomSelection == 10) {
+		if (randomSelection >= 9) { ///***************************************for testing
 			this.type = EncounterType.POSITIVE; 
 		}
-		else if(randomSelection == 8 || randomSelection == 9) {
+		else if(randomSelection == 8) {
 			this.type = EncounterType.NEUTRAL;
 		}
 		else {
@@ -111,17 +111,11 @@ public class Encounter {
 		return creature;
 	}
 	
+	
 	@Override
 	public String toString() {
-		if(look == EncounterType.NEGATIVE) {
-			return this.whatDoYouSee;
-		}
-		else {
-			return "You look around and see " + this.whatDoYouSee; 
-		}
+		return "You see " + this.whatDoYouSee;
 	}
-	
-	
 
 
 
