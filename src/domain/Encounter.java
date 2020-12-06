@@ -27,58 +27,11 @@ public class Encounter {
 
 	public Encounter(String description) {
 		this.type = null;
+		this.look = null;
 		this.description = description;
+		this.whatDoYouSee = " ";
 		this.creature = null;
 		this.alreadyLooked = false;
-	}
-	
-	public void setupEncounter() {
-		typeOfEncounter();
-		typeOfLook();
-		lookDescription();
-		this.creature = new Creature();
-		creature.setupCreature();
-	}
-	
-	public void lookDescription() {
-		int randomSelector;
-		if (look == EncounterType.POSITIVE) {
-			randomSelector = (int) (Math.random()*this.positiveLook.length);
-			this.whatDoYouSee = this.positiveLook[randomSelector];
-		}
-		else if(look == EncounterType.NEUTRAL) {
-			randomSelector = (int) (Math.random()*this.neutralLook.length);
-			this.whatDoYouSee = this.neutralLook[randomSelector];
-		}
-		else {
-			this.whatDoYouSee = "Oh no! You caught the attention of an agressive creature.";
-		}
-	}
-	
-	public void typeOfEncounter() {
-		int randomSelection = (int) (Math.random()*(10)+1);
-		if (randomSelection >= 9) { ///***************************************for testing
-			this.type = EncounterType.POSITIVE; 
-		}
-		else if(randomSelection == 8) {
-			this.type = EncounterType.NEUTRAL;
-		}
-		else {
-			this.type = EncounterType.NEGATIVE;
-		}
-	}
-	
-	public void typeOfLook() {
-		int randomSelection = (int) (Math.random()*(4)+1);
-		if (randomSelection == 1) {
-			look = EncounterType.NEGATIVE; 
-		}
-		else if(randomSelection == 2) { 
-			look = EncounterType.POSITIVE;
-		}
-		else {
-			look = EncounterType.NEUTRAL;
-		}
 	}
 	
 	public Creature getCreature() {
@@ -105,18 +58,68 @@ public class Encounter {
 		this.alreadyLooked = true;
 	}
 	
-	public Creature getNewCreature() {
-		Creature creature = new Creature();
-		creature.setupCreature();
-		return creature;
+	public String getLookDescription() {
+		return this.whatDoYouSee;
 	}
 	
+	public void lookDescription() {
+		int randomSelector;
+		if (look == EncounterType.POSITIVE) {
+			randomSelector = (int) (Math.random()*this.positiveLook.length);
+			this.whatDoYouSee = this.positiveLook[randomSelector];
+		}
+		else if(look == EncounterType.NEUTRAL) {
+			randomSelector = (int) (Math.random()*this.neutralLook.length);
+			this.whatDoYouSee = this.neutralLook[randomSelector];
+		}
+		else {
+			this.whatDoYouSee = "Oh no! You caught the attention of an agressive creature.";
+		}
+	}
+	
+	public Creature getNewCreature() {
+		Creature newCreature = new Creature();
+		newCreature.setupCreature();
+		return newCreature;
+	}
+	
+	public void typeOfEncounter() {
+		int randomSelection = (int) (Math.random()*(10)+1);
+		if (randomSelection >= 9) {
+			this.type = EncounterType.POSITIVE; 
+		}
+		else if(randomSelection == 8) {
+			this.type = EncounterType.NEUTRAL;
+		}
+		else {
+			this.type = EncounterType.NEGATIVE;
+		}
+	}
+	
+	public void typeOfLook() {
+		int randomSelection = (int) (Math.random()*(4)+1);
+		if (randomSelection == 1) {
+			look = EncounterType.NEGATIVE; 
+		}
+		else if(randomSelection == 2) { 
+			look = EncounterType.POSITIVE;
+		}
+		else {
+			look = EncounterType.NEUTRAL;
+		}
+	}
+	
+	public void setupEncounter() {
+		typeOfEncounter();
+		typeOfLook();
+		lookDescription();
+		this.creature = new Creature();
+		creature.setupCreature();
+	}
 	
 	@Override
 	public String toString() {
 		return "You see " + this.whatDoYouSee;
 	}
-
-
 
 }
