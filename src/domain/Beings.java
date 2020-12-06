@@ -81,22 +81,18 @@ public class Beings {
 	
 	//****************battle methods*******************************
 
-	public int attackModifier() {
-		return (int) (Math.random()*(6)+1);
-	}
-
 	public void damaged(int hitAmount) {
 		hitpoints -= (hitAmount +  + attackBonus);
 	}
 	
-	public int attack() {	
-		setAttackPoints(attackModifier());	
+	public int attackAndShare() {	
+		setAttackPoints((int)(Math.random()*(6)+1));	
 		return this.attack;
 	}
 
 	public int seeIfAttack(int levelOfDifficulty) { //for special attacks
 		if (levelOfDifficulty == 2) {
-			return (int) (Math.random()*(20) + 3);
+			return (int) (Math.random()*(20) + 4);
 		}
 		return (int) (Math.random()*(20));
 	}
@@ -110,7 +106,5 @@ public class Beings {
 			alive = false;
 		}
 	}
-
-
 	
 }

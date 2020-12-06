@@ -65,8 +65,8 @@ class BeingsTest {
 	@Test
 	void beings_shares_attack() {
 		Beings be = new Beings("player", -2);
-		int attack = be.attack();
-		assertTrue(attack >= 1 && attack <= 7);
+		int attack = be.getAttackPoints();
+		assertEquals(0, attack); //default is 0
 	}
 	
 	@Test
@@ -89,15 +89,46 @@ class BeingsTest {
 		Beings be = new Beings("player", -2);
 		assertTrue(be.isAlive()); //default is true
 	}
-	
-	
+
 	@Test
-	void beings_is_damaged() {
+	void beings_calculates_damange() {
 		Beings be = new Beings("player", -2);
 		be.setHitpoints(3); //beings has 3 hp
 		be.damaged(2); //beings is damaged for 2 points
 		int hp = be.getHitpoints(); 
 		assertEquals(1, hp); //beings should be 1
+	}
+	
+	@Test
+	void beings_shares_full_attack() {
+		Beings be = new Beings("player", -2);
+		int attack = be.attackAndShare();
+		assertTrue(attack >= 1 && attack <= 7);
+	}
+	
+	@Test
+	void beings_sees_if_attack_is_Successful() {
+		Beings be = new Beings("player", -2);
+		int attackRating = be.seeIfAttack(); //default is random 0 - 20
+		assertTrue(attackRating >= 0 && attackRating <= 20);
+	}
+	
+	@Test
+	void beings_adjusts_Difficulty_to_see_if_attack_is_Successful() {
+		Beings be = new Beings("player", -2);
+		int attackRating = be.seeIfAttack(1); //default is random 0 - 20
+		assertTrue(attackRating >= 0 && attackRating <= 20);
+		
+		attackRating = be.seeIfAttack(2); //higher difficulty hitting for #2
+		assertTrue(attackRating >= 4 && attackRating <= 24);
+	}
+	
+	@Test
+	void beings_checks_to_see_if_it_is_alive() {
+		Beings be = new Beings("player", -2);
+		assertTrue(be.isAlive()); //beings are always alive by default
+		be.checkDeath();
+		assertFalse(be.isAlive()); //default hp is 0, so if we check before setup, player should be marked as dead
 	}
 	
 }

@@ -22,7 +22,7 @@ public class Creature extends Beings{
 	}
 	
 	@Override
-	public int attack() {
+	public int attackAndShare() {
 		int attack = 0;
 		switch(this.difficulty) {
 		case EASY:

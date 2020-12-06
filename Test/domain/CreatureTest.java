@@ -73,7 +73,7 @@ class CreatureTest {
 	void creature_attacks() {
 		Creature creature = new Creature();
 		creature.setupCreature();
-		int attack = creature.attack();
+		int attack = creature.attackAndShare();
 		assertTrue(attack >= 1 && attack <= 7);
 	}
 	
