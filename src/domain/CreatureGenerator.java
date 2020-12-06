@@ -26,9 +26,11 @@ public class CreatureGenerator {
 			"Ifrit", "Rukh", "Leopard", "Giant", "Bat", "Bear", "Caracal", "Toad",
 			"Viper", "Crocodile", "Spider", "Anzu", "Dragon", "Manticore", "Basilisk", "Sphinx", "Chimera", "Almiraj"};
 	private CreatureDifficulty difficulty;
+	private int attackModifier;
 	
 	public CreatureGenerator() {
 		this.difficulty = CreatureDifficulty.EASY;	
+		this.attackModifier = 0;
 	}
 	
 	public CreatureDifficulty generateDifficulty() {
@@ -135,5 +137,18 @@ public class CreatureGenerator {
 		}
 		return (defense * -1);
 	}
+	
+	public int difficultyBasedAttack() {
+		switch(this.difficulty) {
+		case EASY:
+			return (int) ((Math.random()*(3)+1));
+		case MEDIUM:
+			return (int) ((Math.random()*(5))+2);
+		case HARD:
+			return (int) ((Math.random()*(7))+4);
+		}
+		return 0;
+	}
+	
 	
 }

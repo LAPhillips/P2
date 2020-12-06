@@ -13,7 +13,7 @@ public class Beings {
 		this.name = "noName";
 		this.hitpoints = 0;
 		this.baseAttack = 20;
-		this.defense = 0;
+		this.defense = 1;
 		this.attack = 0;
 		this.attackBonus = 0;
 		this.alive = true;
@@ -25,6 +25,7 @@ public class Beings {
 		this.baseAttack = 20;
 		this.defense = defense;
 		this.attack = 0;
+		
 		this.attackBonus = 0;
 		this.alive = true;
 	}

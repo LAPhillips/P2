@@ -101,6 +101,7 @@ class CreatureGeneratorTest {
 		assertTrue(hp >= 1 && hp <= 6, "third"); //hp should fall between 1 and 6	
 	}
 	
+	
 	@Test
 	void cG_generates_defense() {
 		CreatureGenerator gen = new CreatureGenerator();
@@ -117,5 +118,20 @@ class CreatureGeneratorTest {
 		assertTrue(def >= -2 && def <= 0, "third"); //def should fall between -1 and 0
 	}
 	
+	@Test
+	void cG_generates_attack_based_on_creature_difficulty() {
+		CreatureGenerator gen = new CreatureGenerator();
+		gen.setCreatureDifficulty(3);
+		int attackMod = gen.difficultyBasedAttack();
+		assertTrue(attackMod >= 4 && attackMod <= 10, "first"); //mod should fall between 4 and 10
+		
+		gen.setCreatureDifficulty(2);
+		attackMod = gen.difficultyBasedAttack();
+		assertTrue(attackMod >= 2 && attackMod <= 7, "second"); //mod should fall between 2 and 7
+		
+		gen.setCreatureDifficulty(1);
+		attackMod = gen.difficultyBasedAttack();
+		assertTrue(attackMod >= 1 && attackMod <= 4, "third"); //mod should fall between 1 and 4
+	}
 
 }

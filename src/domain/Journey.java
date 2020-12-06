@@ -201,12 +201,8 @@ public class Journey {
 	}
 	
 	public void takesDamage(Player attacker, Beings attacked, int attackType) {
-		int hit = attacker.attack(attackType); // the creature calculates how much they hit for
+		int hit = attacker.seeIfAttack(attackType); // the creature calculates how much they hit for
 		attacked.damaged(hit); //player takes damage
 	}
 	
-
-	
-	
-
 }

@@ -23,18 +23,7 @@ public class Creature extends Beings{
 	
 	@Override
 	public int attackAndShare() {
-		int attack = 0;
-		switch(this.difficulty) {
-		case EASY:
-			attack = (int) ((Math.random()*(3)+1));
-			break;
-		case MEDIUM:
-			attack = (int) ((Math.random()*(5))+2);
-			break;
-		case HARD:
-			attack = (int) ((Math.random()*(7))+3);
-			break;
-		}	
+		int attack = generator.difficultyBasedAttack();
 		super.setAttackPoints(attack);
 		return attack;
 	}
