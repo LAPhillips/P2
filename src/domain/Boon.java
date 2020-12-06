@@ -15,12 +15,33 @@ public class Boon {
 	};
 	private BoonType type;
 	private int boonAmount;
-
 	private String currentBoon;
 
 	public Boon() {
 		this.type = null;
 		this.boonAmount = 0;
+		this.currentBoon = " ";
+	}
+	
+	public String getCurrentBoon() {
+		return this.currentBoon;
+	}
+	
+	public BoonType getBoonType() {
+		return this.type;
+	}
+	
+	public int getBoonAmount() {
+		return boonAmount;
+	}
+	
+	public void setBoonAmount() {
+		boonAmount = (int) (Math.random()*(5)+1);
+	}
+	
+	public void setCurrentBoon() {
+		int randomSelection = (int) (Math.random()*(boon.length));
+		this.currentBoon = boon[randomSelection] + " you feel stronger.";
 	}
 	
 	public void setupNewBoon() {
@@ -54,26 +75,4 @@ public class Boon {
 		}
 	}
 	
-	public BoonType getBoonType() {
-		return this.type;
-	}
-	
-	public void setBoonAmount() {
-		boonAmount = (int) (Math.random()*(5)+1);
-	}
-	
-	public int getBoonAmount() {
-		return boonAmount;
-	}
-	
-	public void setCurrentBoon() {
-		int randomSelection = (int) (Math.random()*(boon.length));
-		this.currentBoon = boon[randomSelection] + " you feel stronger.";
-	}
-	
-	public String getCurrentBoon() {
-		return this.currentBoon;
-	}
-	
-
 }
