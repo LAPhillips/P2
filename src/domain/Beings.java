@@ -83,7 +83,7 @@ public class Beings {
 	//****************battle methods*******************************
 
 	public void damaged(int hitAmount) {
-		hitpoints -= (hitAmount +  + attackBonus);
+		hitpoints -= (hitAmount  + attackBonus);
 	}
 	
 	public int attackAndShare() {	

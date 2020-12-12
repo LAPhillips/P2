@@ -52,7 +52,7 @@ public class Battle {
 	public int playerAttack(int attackType) {
 		if (isHit(attackType)) {
 			int hit = caulculatePlayerDamage(attackType);
-				defender.damaged(hit); //player takes damage
+				defender.damaged(hit); //creature takes damage
 				checkDeath();
 				return hit;
 			}	

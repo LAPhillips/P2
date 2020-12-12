@@ -199,8 +199,6 @@ public class Journey {
 		return encounter.getEncounterType();
 	}
 	
-
-	
 	@Override 
 	public String toString() {
 		return encounterDescription();
