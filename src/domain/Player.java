@@ -21,4 +21,20 @@ public class Player extends Beings {
 		return (int) ((Math.random()*(4))+1);
 	}
 	
+	public int attackAndShare(int attackType) {
+		if (attackType == 1) {
+			setAttackPoints((int)(Math.random()*(6)+1));	
+		}
+		else {
+			setAttackPoints((int)(Math.random()*(10)+3));	
+		}
+
+		return this.getAttackPoints();
+	}
+	
+	@Override
+	public String toString() {
+		return this.getName();
+	}
+	
 }

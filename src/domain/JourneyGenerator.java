@@ -1,12 +1,13 @@
 package domain;
 
 public class JourneyGenerator {
+	private JourneyType type;
 	private final int SHORT = 6;
 	private final int MEDIUM = 11;
 	private final int LONG = 16;
 	//you arrive at a  
 	private String[] geographicFeature = new String[] {
-			"a quiet stream flowing through the woods.",	"a dark cave. It looks dangerous.",
+			"a quiet stream flowing through the woods.","a dark cave. It looks dangerous.",
 			"a grove of olive trees.", "a huge canyon that reaches out into the far distance.",
 			"a small hill with several trees on top.", "the foot of a mountain, with ragged rocks jutting out.",
 			"a still lake with fish swimming lazily among rocks.", "a yellow field of swaying barley.",
@@ -19,15 +20,42 @@ public class JourneyGenerator {
 			"salt flats glimmering white in the sun.", "the charred remains of a house."};
 	
 	public JourneyGenerator() {
+		this.type = null;
 	}
+	
+	public JourneyType getJourneyType() {
+		return this.type;
+	}
+	
+	public String[] implementJourney(String response) {
+		journeyChoice(response);
+		return getJourney();
+	}
+	
+	public void journeyChoice(String response) {
+			if (response.equalsIgnoreCase("C") ||
+					response.equalsIgnoreCase("Cedar Forest")||
+					response.equalsIgnoreCase("Cedar")) {
+				type = JourneyType.SHORT;
+			}
+			else if (response.equalsIgnoreCase("M") ||
+					response.equalsIgnoreCase("Mount Mashu")||
+					response.equalsIgnoreCase("Mount") ||
+					response.equalsIgnoreCase("Mashu")) {
+				type = JourneyType.MEDIUM;
+			}
+			else {
+				type = JourneyType.LONG;
+			}
+		}
 	
 	public String journeyRandomizer(String[] journeyComponent) {
 		int index = (int) (Math.random()*(journeyComponent.length)-1);
 		return journeyComponent[index];
 	}
 
-	public String[] getJourney(JourneyType type) {
-		int length = journeyLength(type);
+	public String[] getJourney() {
+		int length = journeyLength();
 		String[] path = new String[length];
 		for (int i = 0; i < length; i++) {
 			path[i] = this.journeyRandomizer(this.geographicFeature);
@@ -35,7 +63,7 @@ public class JourneyGenerator {
 		return path;
 	}
 	
-	public int journeyLength(JourneyType type) {
+	public int journeyLength() {
 		switch(type) {
 		case SHORT:
 			return this.SHORT;
@@ -46,6 +74,4 @@ public class JourneyGenerator {
 	}
 		return 0;
 	}
-	
-	
 }

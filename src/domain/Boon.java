@@ -31,6 +31,7 @@ public class Boon {
 		return this.type;
 	}
 	
+	
 	public int getBoonAmount() {
 		return boonAmount;
 	}
@@ -54,11 +55,14 @@ public class Boon {
 		switch(type) {
 		case HEAL:
 			player.heal(boonAmount);
+			break;
 		case DEFENSE:
 			int defense = player.getDefense();
 			player.setDefense(defense - boonAmount);
+			break;
 		case ATTACK:
 			player.setAttackBonus(boonAmount);
+			break;
 			}
 	}
 	
@@ -73,6 +77,11 @@ public class Boon {
 		else {
 			type = BoonType.ATTACK;
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return this.currentBoon;
 	}
 	
 }

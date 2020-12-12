@@ -30,7 +30,7 @@ public class Creature extends Beings{
 	
 	@Override
 	public String toString() {
-		return super.getName() + " has " + super.getHitpoints() + " hit points.";
+		return super.getName();
 	}
 
 	//****************basic getters & setters*******************************

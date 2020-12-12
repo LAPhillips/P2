@@ -31,7 +31,7 @@ class CreatureTest {
 		creature.setHitpoints(3); //creature has 3 hp
 		creature.setRandomDefense();
 		creature.setRandomDifficulty();
-		String creatureToString = creature.getName() + " has 3 hit points.";
+		String creatureToString = creature.getName();
 		assertTrue(creature.toString().equals(creatureToString));
 	}
 
