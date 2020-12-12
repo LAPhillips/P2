@@ -5,7 +5,7 @@ public class Boon {
 	private String[] boon = new String[] {
 			"An old sage comes your way and whispers a sacred incantation. After listening to it,",
 			"On the ground you notice a small glittering vial. You recognize the vial is being a powerful tonic and after drinking it",
-			"The goddess Innanna comes to you in a dream and tells you some secret information. After waking up ,",
+			"The goddess Innanna comes to you in a dream and tells you some secret information. After waking up,",
 			"You notice a beautiful rainbow in the sky. Anu has blessed you and",
 			"At your foot, you notice a small copper talisman in the shape of a Lamassu. Upon putting it in your pocket,",
 			"An old man, gray and wizened, approaches you and tells you the story of the Enuma Elis. After listening to it,",

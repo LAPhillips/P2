@@ -1,7 +1,5 @@
 package presentation;
 
-import domain.Journey;
-
 public class TaleOfNammu {
 
 	public static void main(String[] args) {

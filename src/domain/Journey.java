@@ -125,7 +125,7 @@ public class Journey {
 	public String implementBoon() {
 		boon.implementBoon(player);
 		String boonDescription = boon + "\n" + boon.getBoonType();
-		boon.setupNewBoon();
+		boon.setupNewBoon(); //new boon is always setup after the old boon is used
 		return boonDescription;
 	}
 	
@@ -199,10 +199,24 @@ public class Journey {
 		return encounter.getEncounterType();
 	}
 	
+	public int determineAttackType(String attackTypeEntered) {
+		int attackType = 0;
+		if (Character.isDigit(attackTypeEntered.charAt(0))) { //checking to see if it is a digit
+			attackType = Integer.parseInt(attackTypeEntered); //turning it into int
+			if (attackType < 0 && attackType > 4) { //making sure it is in the ui menu range
+				attackType = 1; //if not, automatically set to default (1)
+			}
+		}
+		else { //if it isn't a digit
+			attackType = 1; //set it to default(1)
+		}
+		return attackType;
+	}
+	
 	@Override 
 	public String toString() {
 		return encounterDescription();
 	}
-	
+
 
 }
