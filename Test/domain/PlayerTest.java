@@ -35,6 +35,18 @@ class PlayerTest {
 		int healAmount = player.healAmount();
 		assertTrue(healAmount >= 1 && healAmount <=5);
 	}
+	
+	@Test
+	void player_implements_and_shares_heals() {
+		Player player = new Player("player", -2);
+		player.calculateHitpoints();
+		int hp = player.getHitpoints();
+		int healAmount = player.implementHeal();
+		
+		int newHp = player.getHitpoints();
+		assertTrue(healAmount >= 1 && healAmount <= 5);
+		assertTrue(newHp > hp); //new HP should be more than old HP
+	}
 
 	
 

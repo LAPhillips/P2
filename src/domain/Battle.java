@@ -3,10 +3,16 @@ package domain;
 public class Battle {
 	private Beings attacker;
 	private Beings defender;
+	private int mostRecentHit;
 
 	public Battle(Beings attacker, Beings defender) {
 		this.attacker = attacker;
 		this.defender = defender;
+		this.mostRecentHit = 0;
+	}
+	
+	public int getMostRecentHit() {
+		return this.mostRecentHit;
 	}
 	
 	public void checkDeath() {
@@ -41,22 +47,26 @@ public class Battle {
 	
 	public int creatureAttack() {
 		if (isHit()) {
-			int hit = caulculateDamage();
-			defender.damaged(hit); //player takes damage
+			this.mostRecentHit = caulculateDamage();
+			defender.damaged(mostRecentHit); //player takes damage
 			checkDeath();
-			return hit;
 		}
-		return 0;
+		else {
+			mostRecentHit = 0;
+		}
+		return mostRecentHit;
 	}
 	
 	public int playerAttack(int attackType) {
 		if (isHit(attackType)) {
-			int hit = caulculatePlayerDamage(attackType);
-				defender.damaged(hit); //creature takes damage
-				checkDeath();
-				return hit;
+			mostRecentHit = caulculatePlayerDamage(attackType);
+			defender.damaged(mostRecentHit); //creature takes damage
+			checkDeath();
 			}	
-		return 0;
+		else {
+			mostRecentHit = 0;
+		}
+		return mostRecentHit;
 	}
 	
 	public BattleStates creatureBattleState() {	

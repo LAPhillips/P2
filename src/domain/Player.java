@@ -17,9 +17,17 @@ public class Player extends Beings {
 		super.setHitpoints(hp);
 	}
 	
+	public int implementHeal() {
+		int amount = healAmount();
+		heal(amount);
+		return amount;
+	}
+	
 	public int healAmount() {
 		return (int) ((Math.random()*(4))+1);
 	}
+	
+	
 	
 	public int attackAndShare(int attackType) {
 		if (attackType == 1) {

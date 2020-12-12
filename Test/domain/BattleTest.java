@@ -5,7 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class BattleTest {
-
+	@Test
+	void battle_shares_mostRecentHit() {
+		Beings attacker = new Beings();
+		Beings defender = new Beings();
+		Battle battle = new Battle(attacker, defender);
+		assertEquals(0, battle.getMostRecentHit()); //default is 0
+	}
+	
 	@Test
 	void battle_checks_for_death() {
 		Beings attacker = new Beings();

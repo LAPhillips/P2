@@ -11,7 +11,6 @@ public class Journey {
 	private int distance;
 	private boolean isOver;
 	private Boon boon;
-	private int hit;
 
 	public Journey() {
 		this.generator = new JourneyGenerator();
@@ -22,7 +21,6 @@ public class Journey {
 		this.distance = 0;
 		this.isOver = false;
 		this.boon = new Boon();
-		this.hit = 0;
 	}
 	
 	//overloaded constructor for testing
@@ -34,9 +32,7 @@ public class Journey {
 		this.distance = 0;
 		this.isOver = false;
 		this.boon = new Boon();
-		this.hit = 0;
-	}
-	
+	}	
 
 	public String[] getPath() {
 		return this.path;
@@ -49,13 +45,19 @@ public class Journey {
 	public JourneyType getJourneyType() {
 		return generator.getJourneyType();
 	}
-
-	public String getEncounterDescription() {
-		return this.encounter.getDescription();
-	}
 	
 	public Boon getBoon() {
 		return boon;
+	}
+	
+	//only used for testing
+	public Battle getBattle() {
+		return this.battle;
+	}
+	
+	public int getHit() {
+		return battle.getMostRecentHit()
+				;
 	}
 	
 	public int getDistanceLeft() {
@@ -90,6 +92,10 @@ public class Journey {
 		this.isOver = true;
 	}
 
+	public Encounter getEncounter() {
+		return this.encounter;
+	}
+	
 	public void setupJourney(String response, String playerName) {
 		//set up the journey based on choice
 		path = generator.implementJourney(response);
@@ -98,7 +104,6 @@ public class Journey {
 		player.calculateHitpoints();
 		//set up first encounter
 		pathTracker = 0;
-		setDistanceLeft();
 		newEncounter();
 		boon.setupNewBoon();
 	}
@@ -114,21 +119,12 @@ public class Journey {
 		setDistanceLeft(); //every new encounter, caclculates a new distance
 	}
 	
-	public void startCreatureBattle() {
-		this.battle = new Battle (encounter.getCreature(), player);
-	}
-	
-	public void startPlayerBattle() {
-		this.battle = new Battle (player, encounter.getCreature());
-	}
-	
 	public String implementBoon() {
 		boon.implementBoon(player);
 		String boonDescription = boon + "\n" + boon.getBoonType();
 		boon.setupNewBoon(); //new boon is always setup after the old boon is used
 		return boonDescription;
 	}
-	
 	
 	public void setDistanceLeft() {
 		int distance = path.length - pathTracker;
@@ -145,23 +141,17 @@ public class Journey {
 	}
 	
 	public int implementHeal() {
-		int amount = player.healAmount();
-		player.heal(amount);
-		return amount;
+		return player.implementHeal();
 	}
 	
-	public int creatureAttacks() {
-		return battle.creatureAttack();
+	public void startCreatureBattle() {
+		this.battle = new Battle (encounter.getCreature(), player);
 	}
 	
-	public int playerAttack (int attackType) {
-		return battle.playerAttack(attackType);
+	public void startPlayerBattle() {
+		this.battle = new Battle (player, encounter.getCreature());
 	}
-	
-	public int getHit() {
-		return this.hit;
-	}
-	
+
 	public BattleStates creatureBattle() {
 		startCreatureBattle();
 		return battle.creatureBattleState();
@@ -171,7 +161,6 @@ public class Journey {
 		startPlayerBattle();
 		return battle.playerBattleState(attackType);
 	}
-	
 
 	public boolean areAlive() {
 		if (player.isAlive() && getCurrentCreature().isAlive()) {
@@ -191,7 +180,7 @@ public class Journey {
 		int attackType = 0;
 		if (Character.isDigit(attackTypeEntered.charAt(0))) { //checking to see if it is a digit
 			attackType = Integer.parseInt(attackTypeEntered); //turning it into int
-			if (attackType < 0 && attackType > 4) { //making sure it is in the ui menu range
+			if (attackType < 0 || attackType > 3) { //making sure it is in the ui menu range
 				attackType = 1; //if not, automatically set to default (1)
 			}
 		}
