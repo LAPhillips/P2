@@ -1,4 +1,4 @@
-package domain;
+  package domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -104,6 +104,34 @@ class BattleTest {
 		
 		int damage = battle.playerAttack(1);
 		assertFalse(damage == 0); //it should never return a 0, b/c it wont miss
+	}
+	
+	@Test
+	void battle_shares_creaturebattle_state() {
+		Player attacker = new Player("player", -2);
+		Creature defender = new Creature();
+		defender.setupCreature();
+		defender.setDefense(100);//setting defense so high will make it impossible to miss
+		Battle battle = new Battle(attacker, defender);
+		assertEquals(BattleStates.DAMAGE, battle.creatureBattleState());
+		
+		defender.setDefense(-100); //defense so low, impossible to hit
+		battle = new Battle(attacker, defender);
+		assertEquals(BattleStates.MISS, battle.creatureBattleState());
+	}
+	
+	@Test
+	void battle_shares_playerbattle_state() {
+		Player attacker = new Player("player", -2);
+		Creature defender = new Creature();
+		defender.setupCreature();
+		defender.setDefense(100);//setting defense so high will make it impossible to miss
+		Battle battle = new Battle(attacker, defender);
+		assertEquals(BattleStates.DAMAGE, battle.playerBattleState(1));
+		
+		defender.setDefense(-100); //defense so low, impossible to hit
+		battle = new Battle(attacker, defender);
+		assertEquals(BattleStates.MISS, battle.playerBattleState(1));
 	}
 
 

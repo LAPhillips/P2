@@ -164,24 +164,12 @@ public class Journey {
 	
 	public BattleStates creatureBattle() {
 		startCreatureBattle();
-		hit = creatureAttacks();
-		if (hit == 0) {
-			return BattleStates.MISS;
-		}
-		else {
-			return BattleStates.DAMAGE;
-		}
+		return battle.creatureBattleState();
 	}
 	
 	public BattleStates playerBattle(int attackType) {
 		startPlayerBattle();
-		hit = playerAttack(attackType);
-		if (hit == 0) {
-			return BattleStates.MISS;
-		}
-		else {
-			return BattleStates.DAMAGE;
-		}
+		return battle.playerBattleState(attackType);
 	}
 	
 

@@ -58,5 +58,27 @@ public class Battle {
 			}	
 		return 0;
 	}
+	
+	public BattleStates creatureBattleState() {	
+		int hit = creatureAttack();
+		if (hit == 0) {
+			return BattleStates.MISS;
+		}
+		else {
+			return BattleStates.DAMAGE;
+		}
+	}
+	
+	public BattleStates playerBattleState(int attackType) {
+		int hit = playerAttack(attackType);
+		if (hit == 0) {
+			return BattleStates.MISS;
+		}
+		else {
+			return BattleStates.DAMAGE;
+		}
+	}
+	
+	
 
 }
