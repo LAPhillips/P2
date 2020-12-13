@@ -47,6 +47,13 @@ class PlayerTest {
 		assertTrue(healAmount >= 1 && healAmount <= 5);
 		assertTrue(newHp > hp); //new HP should be more than old HP
 	}
+	
+	@Test
+	void player_shares_name_as_to_string() {
+		Player player = new Player("player", -2);
+		String playerName = player.toString();
+		assertTrue(playerName.equals("player"));
+	}
 
 	
 

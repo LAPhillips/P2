@@ -53,7 +53,7 @@ class BoonTest {
 		assertTrue(type == BoonType.HEAL || type == BoonType.ATTACK || type == BoonType.DEFENSE);
 		
 		int boonAmount = boon.getBoonAmount();
-		assertTrue(boonAmount >= 1 && boonAmount <= 6); //once set boon should no longer be 0
+		assertTrue(boonAmount >= 1 && boonAmount <= 6); //once set, boon should no longer be 0
 	}
 	
 	@Test

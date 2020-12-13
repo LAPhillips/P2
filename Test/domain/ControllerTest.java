@@ -33,8 +33,8 @@ class ControllerTest {
 		Controller control = new Controller();
 		Journey journey = control.getJourney();
 		journey.setupJourney("C", "player");
-		int hit = journey.getHit();
-		assertEquals(0, hit); //default hit should be 0
+		journey.creatureBattle();
+		assertTrue(control.getHit() >= 0 && control.getHit() <= 6); //a creature attack should land between 0 - 6
 	}
 	
 	@Test
