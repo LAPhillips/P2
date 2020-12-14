@@ -1,0 +1,44 @@
+TALE OF NAMMU
+-----------------------
+Created by Lore Phillips
+For SEIS 635 - taught by E. Level
+-----------------------
+GAME PLAY:
+This is a text based game. To play the game, open in an IDE and run the program
+through the file "TaleOfNammu.java".
+
+The game will walk the player through the game. You will be asked for your name
+and which journey you want to go on. 
+
+Journey options:
+--Ceder Forest (Short)
+--Mount Mashu (Medium)
+--Salted Sea (Long)
+
+Once you begin a journey, you will will have a specific number of encounters.
+At each encounter, you may either be attacked by a creature (most likely), 
+have a boon or have nothing happen at all.
+
+To move between enounters you have to travel, however, before you travel, you
+always have the option to 
+--Look
+--Check Stats
+--End game
+
+If you "Look", you will have an additional experience at your current encouter site.
+You can possibly be healed, have nothing happen or get attacked again (small chance).
+
+If you "Check Stats", the game will show you your stats.
+
+If you "End the game", your journey will be ended and the game will be over.
+
+To win the game, you have to reach the end of the journey alive. If you die before you
+reach the end of the journey, you will lose the game.
+
+-----------------------
+UNIT TESTING:
+The unit tests for this software are stored in the Testing folder. Each testing
+file mirrors its domain-level component with the name "Test" at the end. 
+To run each test, run each individual test as a JUnit test.
+
+Coverage as of 12/13/2020 is 98% in the domain layer. No tests were created for the Presentation layer.

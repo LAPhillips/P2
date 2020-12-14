@@ -31,7 +31,6 @@ public class Boon {
 		return this.type;
 	}
 	
-	
 	public int getBoonAmount() {
 		return boonAmount;
 	}

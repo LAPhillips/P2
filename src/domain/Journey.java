@@ -56,8 +56,7 @@ public class Journey {
 	}
 	
 	public int getHit() {
-		return battle.getMostRecentHit()
-				;
+		return battle.getMostRecentHit();
 	}
 	
 	public int getDistanceLeft() {

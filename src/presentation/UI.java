@@ -20,8 +20,16 @@ public class UI {
 
 	public void setupGame() {
 		Journey journey = control.getJourney();
+		System.out.println();
+		System.out.println(">>>----- TALE OF NAMMU -----<<< ");
+		System.out.println("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+		System.out.println();
+		
 		System.out.println("What is your name?");
 		String name = scan.nextLine();
+		System.out.println("As you were sleeping, Nammu came to you in a dream and urged you to explore beyond your home village.");
+		System.out.println("Upon awaking, you know your destiny. Where will you go?");
+		System.out.println();
 		System.out.println("Type first letter of the journey you would like to go on:");
 		System.out.println("[C]edar Forest,  [M]ount Mashu,  [S]alted Sea");
 		String response = scan.nextLine();

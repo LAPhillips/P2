@@ -27,8 +27,6 @@ public class Player extends Beings {
 		return (int) ((Math.random()*(4))+1);
 	}
 	
-	
-	
 	public int attackAndShare(int attackType) {
 		if (attackType == 1) {
 			setAttackPoints((int)(Math.random()*(6)+1));	
