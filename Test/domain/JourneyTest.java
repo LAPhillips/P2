@@ -50,7 +50,8 @@ class JourneyTest {
 	void journey_gets_most_recent_hit() {
 		Journey journey = new Journey();
 		journey.setupJourney("C", "player");
-		journey.startCreatureBattle(); 
+		Beings creature = journey.getCurrentCreature();
+		journey.startCreatureBattle(creature); 
 		int hit = journey.getHit();
 		assertEquals(0, hit); //default is 0
 	}
@@ -206,14 +207,14 @@ class JourneyTest {
 	void journey_starts_new_creature_battle() {
 		Journey journey = new Journey();
 		journey.setupJourney("C", "player");
-		
+		Beings creature = journey.getCurrentCreature();
 		assertNull(journey.getBattle()); //default state is null
 		
-		journey.startCreatureBattle(); //now the battle starts
+		journey.startCreatureBattle(creature); //now the battle starts
 		Battle battle = journey.getBattle();
 		assertNotNull(battle); //battle is no longer null
 		
-		journey.startCreatureBattle(); //new battle starts
+		journey.startCreatureBattle(creature); //new battle starts
 		Battle newBattle = journey.getBattle();
 		assertFalse(battle.equals(newBattle)); //should not be the same battle
 	}
@@ -238,8 +239,9 @@ class JourneyTest {
 	void journey_implements_creature_battle() {
 		Journey journey = new Journey();
 		journey.setupJourney("C", "player");
+		Beings creature = journey.getCurrentCreature();
 		
-		BattleStates state = journey.creatureBattle();
+		BattleStates state = journey.creatureBattle(creature);
 		Battle battle = journey.getBattle();
 		assertNotNull(battle); //battle is no longer null
 		assertTrue(state == BattleStates.DAMAGE || state == BattleStates.MISS); //state is one or the other
@@ -315,5 +317,17 @@ class JourneyTest {
 		String description = journey.toString();
 		assertEquals(description.charAt(description.length()-1), '.'); //all journey segments end in '.'
 	}
+	
+	@Test
+	void journey_sets_new_creature() {
+		Journey journey = new Journey();
+		journey.setupJourney("C", "player");
+		Beings creature = journey.getCurrentCreature();
+		Beings newCreature = journey.getNewCreature();
+		
+		journey.setNewCreature(newCreature);
+		assertFalse(creature.equals(journey.getCurrentCreature())); //the current creature should be updated
+	}
+	
 }
 

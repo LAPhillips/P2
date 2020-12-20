@@ -38,6 +38,10 @@ public class Encounter {
 		return this.creature;
 	}
 	
+	public void setNewCreature(Beings creature) {
+		this.creature = (Creature) creature;
+	}
+	
 	public EncounterType getEncounterType() {
 		return this.type;
 	}

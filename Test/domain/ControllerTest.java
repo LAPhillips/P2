@@ -33,7 +33,8 @@ class ControllerTest {
 		Controller control = new Controller();
 		Journey journey = control.getJourney();
 		journey.setupJourney("C", "player");
-		journey.creatureBattle();
+		Beings creature = journey.getCurrentCreature();
+		journey.creatureBattle(creature);
 		assertTrue(control.getHit() >= 0 && control.getHit() <= 6); //a creature attack should land between 0 - 6
 	}
 	
@@ -60,7 +61,8 @@ class ControllerTest {
 		Controller control = new Controller();
 		Journey journey = control.getJourney();
 		journey.setupJourney("C", "player");
-		assertTrue(control.creatureBattleStates() instanceof BattleStates);
+		Beings creature = journey.getCurrentCreature();
+		assertTrue(control.creatureBattleStates(creature) instanceof BattleStates);
 	}
 	
 	@Test

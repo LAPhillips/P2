@@ -143,16 +143,16 @@ public class Journey {
 		return player.implementHeal();
 	}
 	
-	public void startCreatureBattle() {
-		this.battle = new Battle (encounter.getCreature(), player);
+	public void startCreatureBattle(Beings creature) {
+		this.battle = new Battle (creature, player);
 	}
 	
 	public void startPlayerBattle() {
 		this.battle = new Battle (player, encounter.getCreature());
 	}
 
-	public BattleStates creatureBattle() {
-		startCreatureBattle();
+	public BattleStates creatureBattle(Beings creature) {
+		startCreatureBattle(creature);
 		return battle.creatureBattleState();
 	}
 	
@@ -187,6 +187,10 @@ public class Journey {
 			attackType = 1; //set it to default(1)
 		}
 		return attackType;
+	}
+	
+	public void setNewCreature(Beings creature) {
+		encounter.setNewCreature(creature);
 	}
 	
 	@Override 

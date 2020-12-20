@@ -87,7 +87,7 @@ public class UI {
 			//negative look
 			else {
 				Beings creature = journey.getNewCreature();
-				fullBattle();
+				fullBattle(creature);
 			}
 		}
 		//already looked around
@@ -133,15 +133,15 @@ public class UI {
 		else if (eState == EncounterType.NEGATIVE) {
 			System.out.println("You get attacked by a " + control.getCreature() + " "
 					+ control.getCreature().getDifficulty()+ ".");
-			fullBattle();
+			fullBattle(control.getCreature());
 		}
 		else {
 			System.out.println("It is peaceful here. You enjoy your time here and relax.");
 		}
 	}
 	
-	public void creatureAttack(Journey journey) {
-		BattleStates bState = control.creatureBattleStates();
+	public void creatureAttack(Journey journey, Beings creature) {
+		BattleStates bState = control.creatureBattleStates(creature);
 		System.out.println();
 		if (bState == BattleStates.MISS) {
 			System.out.println(control.getCreature() + " missed you."); //if they don't get hit nothing happens
@@ -167,10 +167,11 @@ public class UI {
 		}
 	}
 
-	public void fullBattle() {
+	public void fullBattle(Beings creature) {
 		Journey journey = control.getJourney();
+		journey.setNewCreature(creature);
 		while(journey.areAlive()) {
-			creatureAttack(journey);
+			creatureAttack(journey, creature);
 			if (!journey.areAlive()) {
 				break;
 			}

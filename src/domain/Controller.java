@@ -31,8 +31,8 @@ public class Controller {
 		return journey.implementEncounter();
 	}
 	
-	public BattleStates creatureBattleStates() {
-		return journey.creatureBattle();
+	public BattleStates creatureBattleStates(Beings creature) {
+		return journey.creatureBattle(creature);
 	}
 	
 	public BattleStates playerBattleStates(int attackType) {
